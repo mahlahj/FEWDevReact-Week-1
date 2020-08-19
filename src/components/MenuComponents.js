@@ -1,70 +1,85 @@
 // 1.- Basic structure of a component. 
 import React, { Component } from 'react';
 // 3.- Import the media component to construct the menu for the restaurant. 
-import { Media } from 'reactstrap';
+// 8.- Change the "Media" to "Card", "CardImg", etc to order the images in a different way.
+import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle} from 'reactstrap';
 
 class Menu extends Component {
     constructor(props) {
         super(props);
         // 6.- Define a state for the component as a JS object containing an array list of JS Objects.
-        this.state = {
-            dishes: [
-                {
-                    id: 0,
-                    name: 'Uthapizza',
-                    image: 'assets/images/uthapizza.png',
-                    category: 'mains',
-                    label: 'Hot',
-                    price: '4.99',
-                    description: 'A unique combination of Indian Uthappam (pancake) and Italian pizza, topped with Cerignola olives, ripe vine cherry tomatoes, Vidalia onion, Guntur chillies and Buffalo Paneer'
-                },
-                {
-                    id: 1,
-                    name:'Zucchipakoda',
-                    image: 'assets/images/zucchipakoda.png',
-                    category: 'appetizer',
-                    label:'',
-                    price:'1.99',
-                    description:'Deep fried Zucchini coated with mildly spiced Chickpea flour batter accompanied with a sweet-tangy tamarind sauce'
-                },
-                {
-                    id: 2,
-                    name:'Vadonut',
-                    image: 'assets/images/vadonut.png',
-                    category: 'appetizer',
-                    label:'New',
-                    price:'1.99',
-                    description:'A quintessential ConFusion experience, is it a vada or is it a donut?'
-                },
-                {
-                    id: 3,
-                    name:'ElaiCheese Cake',
-                    image: 'assets/images/elaicheesecake.png',
-                    category: 'dessert',
-                    label:'',
-                    price:'2.99',
-                    description:'A delectable, semi-sweet New York Style Cheese Cake, with Graham cracker crust and spiced with Indian cardamoms'
-                }
-            ]
+        /* 7.- Remove this code to make it more clean and set it apart in another file.
+               Thus creating a new subfolder in Components named: shared subfolder, We're going to use  it
+               to store all the information shared among various components in the React App.
+               Then create a new file named dishes.js and into this dishes.js file paste all the information
+               about the dishes, in the form of an array, and then export it from this dishes.js.*/
+        /* 8.- selected.Dish is started at null so whenever clicked on any of the dishes,
+               the information becomes equal to the selected.Dish.
+               To do that, go into the first Card and introduce the onClick method. 
+               This is to handle events on view. */
+                this.state = {
+                    selectedDish: null
+        }
+    }
+
+    /* Implement the onDishSelect here.
+    This receives the dish as the parameter.
+    To update the selected dish to point to this dish and received it as a parameter
+    we need to change the state by using "this.setState()".
+    We can't directly select dish = dish. Instead we state "this.setState"
+    and inside "selected.Dish" which results in whatever the function is called,
+    then "this.setState" will be set equal to the the parameter received. */
+    onDishSelect(dish) {
+        this.setState({ selectedDish: dish});
+    }
+
+    /* To render the details of the dish we add in one more method here called renderDish
+    which will supply the dish as the parameter and inside we will first check if dish isn't
+    equal to null.
+    Only then the dish will render, otherwise returns an empty div and nothing will be rendered
+    on the screen. Then use the card designed in the card component to render my dish here.
+    Inside the card component copy the card image to display it at the top,
+    and down below display the CardBody, CardTitle, and CardText. */
+    renderDish(dish) {
+        if (dish != null) {
+            return(
+            <Card>
+                <CardImg width="100%" src={dish.image} alt={dish.name} />
+                <CardBody>
+                    <CardTitle>{dish.name}</CardTitle>
+                    <CardText>{dish.description}</CardText>
+                </CardBody>
+            </Card>
+            );
+        }
+        else {
+            return(<div></div>);
         }
     }
 
     render() {
 
         // 5.- Define menu as a constant.
-        const menu = this.state.dishes.map((dish) => {
+        // 8.- Then change "state" for "props".
+        const menu = this.props.dishes.map((dish) => {
             return (
                 // 7.- When rendering a list of items, a key must be provided to recognize the items onscreen.
-                <div key={dish.id} className="col-12 mt-5">
-                    <Media tag="li">
-                        <Media left middle>
-                            <Media object src={dish.image} alt={dish.name} />
-                        </Media>
-                        <Media body className="ml-5">
-                            <Media heading>{dish.name}</Media>
-                            <p>{dish.description}</p>
-                        </Media>
-                    </Media>
+                <div key={dish.id} className="col-12  col-md-5 m-1">
+                    {/* 8.- ^^Add col-md-5 and mod mt. */}
+                    <Card onClick={() => this.onDishSelect(dish)}>
+                        {/* 8.- Change the "Media tag="li" to "Card".
+                        To call the onClick function implemented use this.onDishSelect,
+                        and then pass the dish information as a parameter. */}
+                     {/*<Media left middle> 8.- Suppress the open/close lines. */}
+                            <CardImg width="100%" src={dish.image} alt={dish.name} />
+                            {/* 8.- Change Media to CardImg, replacing object to width*/}
+                        <CardImgOverlay body className="ml-5">
+                            {/* 8.- Change Media to CardImgOverlay at open/close. */}
+                            <CardTitle>{dish.name}</CardTitle>
+                            {/* 8.- Change Media heading to CardTitle. */}
+                            {/*<p>{dish.description}</p> 8.- Deactivate this. */}
+                        </CardImgOverlay>
+                    </Card>
                 </div>
             );
         });
@@ -74,9 +89,14 @@ class Menu extends Component {
             //     return dishes. 
             <div className="container">
                 <div className="row">
-                    <Media list>
-                        {menu}
-                    </Media>
+                    {/* 8.- Remove the <Media list> */}
+                    {menu}
+                </div>
+                <div className="row">
+                {/*  8.- Define a row and inside this display the card.
+                To do that use "this.renderDish" and "this.state.selectedDish" as parameter
+                to that renderDish function.*/}
+                    {this.renderDish(this.state.selectedDish)}
                 </div>
             </div>
         );

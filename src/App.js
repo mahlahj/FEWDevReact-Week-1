@@ -6,7 +6,7 @@ import logo from './logo.svg';*/
 import { Navbar, NavbarBrand } from 'reactstrap';
 Import the menu from MenuComponents.js 
 10.- import the Main from MainComponent*/
-import Main from './components/MainComponents';
+import Main from './components/MainComponent';
 import './App.css';
 /* 7.- Import the dishes from shared folder. */
 import { DISHES } from './shared/dishes';
@@ -24,7 +24,7 @@ class App extends Component {
 
   render () {
     return (
-      <div>
+      <div className="App">
         {/* 10.- The nav bar was moved to the MainComponents, so can be deleted.
         After this only the Main is rendered.
         <Navbar dark color="primary">

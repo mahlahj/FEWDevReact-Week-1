@@ -6,6 +6,7 @@ import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle} from 'rea
 
 
 class Menu extends Component {
+    /* 11.- This constructor is gone 'cuz its "useless".
     constructor(props) {
         super(props);
         // 6.- Define a state for the component as a JS object containing an array list of JS Objects.
@@ -21,9 +22,9 @@ class Menu extends Component {
                This is to handle events on view. */
         /* 10.- Removed this in order to add to MainComps
                     this.state = {
-                    selectedDish: null*/
+                    selectedDish: null
         }
-    }
+    }*/
 
     /* Implement the onDishSelect here.
     This receives the dish as the parameter.

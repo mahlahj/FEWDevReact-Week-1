@@ -1,14 +1,13 @@
-/* 10.- Copy and paste the majority of data from App.js. and DishDetail from MenuComps. */
+/* 10.- Copy and paste the majority of data from App.js. and DishDetail from MenuComp. */
 import React, { Component } from 'react';
 import { Navbar, NavbarBrand } from 'reactstrap';
-import Menu from './MenuComponents';
+import Menu from './MenuComponent';
 import DishDetail from './DishdetailComponent';
 import { DISHES } from '../shared/dishes';
 
 class Main extends Component {
   constructor (props) { // 7.- Add constructor.
     super(props);
-
     this.state = { // 8.- Add state and define it.
       dishes: DISHES,
       selectedDish: null

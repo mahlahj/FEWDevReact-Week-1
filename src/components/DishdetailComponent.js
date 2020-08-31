@@ -12,7 +12,7 @@ import { Card, CardText, CardTitle, CardBody, CardImg, } from 'reactstrap';
                     </CardBody>
                 </Card>
             </div>
-            );
+        );
     }
 
     function RenderComments({comments}) {
@@ -33,7 +33,6 @@ import { Card, CardText, CardTitle, CardBody, CardImg, } from 'reactstrap';
                             }).format(new Date(Date.parse(comment.date)))}</p>
                         </li>
                     </ul>
-                    )}
                 </div>
             );
         }
@@ -54,7 +53,7 @@ import { Card, CardText, CardTitle, CardBody, CardImg, } from 'reactstrap';
                 </div>
                 </div>
             )
-        } else {
+        else {
             dish = <div></div>
         }
         return (
@@ -63,6 +62,5 @@ import { Card, CardText, CardTitle, CardBody, CardImg, } from 'reactstrap';
             </div>
         );
     }
-}
 
 export default DishDetail;

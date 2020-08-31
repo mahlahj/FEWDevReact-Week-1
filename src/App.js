@@ -8,8 +8,7 @@ Import the menu from MenuComponents.js
 10.- import the Main from MainComponent*/
 import Main from './components/MainComponent';
 import './App.css';
-/* 7.- Import the dishes from shared folder. */
-import { DISHES } from './shared/dishes';
+import { BrowserRouter } from 'react-router-dom';
 
 
 class App extends Component {
@@ -24,20 +23,22 @@ class App extends Component {
 
   render () {
     return (
-      <div className="App">
-        {/* 10.- The nav bar was moved to the MainComponents, so can be deleted.
-        After this only the Main is rendered.
-        <Navbar dark color="primary">
-          <div className="container">
-            <NavbarBrand href="/">Ristorante Con Fusion</NavbarBrand>
-          </div>
-        </Navbar>
-        <Menu dishes={this.state.dishes}/> 8.- dishes equal to this.state.dishes.
+      <BrowserRouter>
+        <div>
+          {/* 10.- The nav bar was moved to the MainComponents, so can be deleted.
+            After this only the Main is rendered.
+          <Navbar dark color="primary">
+            <div className="container">
+              <NavbarBrand href="/">Ristorante Con Fusion</NavbarBrand>
+            </div>
+          </Navbar>
+          <Menu dishes={this.state.dishes}/> 8.- dishes equal to this.state.dishes.
                                                The dishes defined in the state for the App 
                                                component are available as props to the menu
                                                component.*/ }
-        <Main />
-      </div>
+          <Main />
+        </div>
+      </BrowserRouter>
     );
   }
 }

@@ -75,9 +75,11 @@ class Contact extends Component {
         else if (this.state.touched.telnum && telnum.length > 12)
             errors.telnum = 'Tel. Number should be <= 12 digits';
 
-        const re = /^[\w\.-]+@[\w\.-]+$/;
-            errors.email = 'Email should contain a @ in the middle';
-
+        
+        const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w)(\.\w{2,3})+$/;
+        if (this.state.touched.email && !re.test(email))
+            errors.email = 'Invalid email address';
+        
         return errors;
     }
 

@@ -77,9 +77,6 @@ class Contact extends Component {
                                     <Control.text model=".firstname" id = "firstname" name = "firstname"
                                         placeholder = "First Name"
                                         className = "form-control" 
-                                        validators {{
-                                            required, minLength: minLength(3), maxLength: maxLength(15)
-                                        }}
                                     />
                                     <Errors
                                         className = "text-danger"
@@ -99,9 +96,6 @@ class Contact extends Component {
                                     <Control.text model = ".lastname" id = "lastname" name = "lastname"
                                         placeholder = "Last Name"
                                         className = "form-control" 
-                                        validators {{
-                                            required, minLength: minLength(3), maxLength: maxLength(15)
-                                        }}
                                     />
                                     <Errors
                                         className = "text-danger"
@@ -121,9 +115,6 @@ class Contact extends Component {
                                     <Control.text model = ".telnum" id = "telnum" name = "telnum"
                                         placeholder = "Tel. Number"
                                         className = "form-control" 
-                                        validators {{
-                                            required, minLength: minLength(3), maxLength: maxLength(15) isNumber
-                                        }}
                                     />
                                     <Errors
                                         className = "text-danger"
@@ -144,9 +135,6 @@ class Contact extends Component {
                                     <Control.text model = ".email" id = "email" name = "email"
                                         placeholder = "Email"
                                         className = "form-control"
-                                        validators {{
-                                            required, validEmail
-                                        }}
                                     />
                                     <Errors
                                         className = "text-danger"

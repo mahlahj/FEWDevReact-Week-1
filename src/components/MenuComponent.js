@@ -38,13 +38,14 @@ const Menu = (props) => {
         return(
             <div className = "container">
                 <div className = "row">
-                    <h4>{props.dishes.errMess}</h4>
+                    <div className = "col-12">
+                        <h4>{props.dishes.errMess}</h4>
+                    </div>
                 </div>
             </div>
         );
     }
     else
-    
         return (
             <div className="container">
                 <div className="row">

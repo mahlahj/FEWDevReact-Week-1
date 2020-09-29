@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Card, CardImg, CardBody, CardText, CardTitle, Breadcrumb, BreadcrumbItem, Modal, ModalHeader, ModalBody, Row, Label, Col, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
+import { Loading } from './LoadingComponent';
 
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
 const minLength = (len) => (val) => val && (val.length >= len);
@@ -113,21 +114,24 @@ function RenderComments( {comments, addComment, dishId} ) {
             <div className = "col-12 col-md-5 m-1">
                 <h4>Comments</h4>
                 <ul className = "list-unstyled">
-                    {comments.map((comment) => {
+                    {this.comments.map((comments) => {
                         return (
-                            <li key = {comment.id}>
-                               <p>{comment.comment}</p>
-                               <p>{comment.author} , {new Intl.DateTimeFormat(
+                            <li key = {comments.id}>
+                               <p>{comments.comment}</p>
+                               <p>{comments.author} , {new Intl.DateTimeFormat(
                                    'en-US', {
                                        year: 'numeric',
                                        month: 'short',
                                        day: '2-digit'
-                                    }).format(new Date(Date.parse(comment.date)))}</p> 
+                                    }).format(new Date(Date.parse(comments.date)))}</p> 
                             </li>
                         );
                     })}
                 </ul>
                 <CommentForm dishId = {dishId} addComment = {addComment} />
+                <RenderComments comments={this.props.comments}
+                addComment={this.props.addComment}
+                dishId={this.props.dish.id} />
             </div>
         );
     else 
@@ -137,7 +141,25 @@ function RenderComments( {comments, addComment, dishId} ) {
 }
 
     const DishDetail = (props) => {
-        if (props.dish != null)
+        if (props.isLoading) {
+            return(
+                <div className = "container">
+                    <div className = "row">
+                        <Loading />
+                    </div>
+                </div>
+            );
+        }
+        else if (props.errMess) {
+            return(
+                <div className = "container">
+                    <div className = "row">
+                        <h4>{props.errMess}</h4>
+                    </div>
+                </div>
+            );
+        }
+        else if (props.dish != null)
             return (
                 <div className="container">
                     <div className="row">
@@ -151,21 +173,17 @@ function RenderComments( {comments, addComment, dishId} ) {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-12 col-md-5 m-1">
-                            <RenderDish dish={props.dish} />
-                        </div>
-                        <div className="col-12 col-md-5 m-1">
-                            <RenderComments comments={props.comments}
+                        <RenderDish dish={props.dish} />
+                        <RenderComments comments={props.comments}
                             addComment={props.addComment}
                             dishId={props.dish.id} />
-                        </div>
                     </div>
                 </div>
             );
             else
             return(
                 <div></div>
-                );
+            );
     }
 
 export default DishDetail;
